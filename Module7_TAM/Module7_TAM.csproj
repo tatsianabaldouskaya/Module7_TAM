@@ -67,7 +67,7 @@
     <Compile Include="PageObjects\MailBoxPage.cs" />
     <Compile Include="PageObjects\AbstractPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests.cs" />
+    <Compile Include="MailBoxTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

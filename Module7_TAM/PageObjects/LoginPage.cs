@@ -16,7 +16,7 @@ namespace Module7_TAM
         private By nextButton = By.XPath("//div[@class='FliLIb DL0QTb']//button");       
 
         public LoginPage(IWebDriver driver) : base(driver) { }
-        public void LogIn(string email, string password)
+        public MailBoxPage LogIn(string email, string password)
         {
             WaitForIsVisible(emailField);
             SendKeys(emailField, email);
@@ -24,6 +24,7 @@ namespace Module7_TAM
             WaitForIsVisible(passwordField);
             SendKeys(passwordField, password);
             Click(nextButton);
+            return new MailBoxPage(driver);
         }
     }
 }

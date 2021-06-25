@@ -8,9 +8,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Module7_TAM
 {
-    class LogOutPage:AbstractPage
+    public class LogOutPage:AbstractPage
     {
-        public By signedOutText = By.XPath("//div[text()= 'Вы не вошли в аккаунт']");
-        public LogOutPage(IWebDriver driver) : base(driver) { }        
+        private By signedOutText = By.XPath("//div[text()= 'Вы не вошли в аккаунт']");
+        public LogOutPage(IWebDriver driver) : base(driver) { }    
+        public By GetSignedOutText()
+        {
+            return signedOutText;
+        }
     }
 }

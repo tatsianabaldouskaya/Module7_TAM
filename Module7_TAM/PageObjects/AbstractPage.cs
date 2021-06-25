@@ -49,10 +49,10 @@ namespace Module7_TAM
             }
             return true;
         }           
-        public string GetElementText(By locator)
-        {
-            return driver.FindElement(locator).Text;
-        }
+        //public string GetElementText(By locator)
+        //{
+        //    return driver.FindElement(locator).Text;
+        //}
         public void SendKeys(By locator, string text)
         {
            // WaitForElementVisible(driver, locator);
