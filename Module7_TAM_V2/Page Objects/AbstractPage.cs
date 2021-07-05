@@ -24,7 +24,7 @@ namespace Module7_TAM
             return new WebDriverWait(DriverInstance.GetDriver(), TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
         }
 
-        public bool isElementDisplayed(IWebElement element)
+        protected bool isElementDisplayed(IWebElement element)
         {
             try
             {

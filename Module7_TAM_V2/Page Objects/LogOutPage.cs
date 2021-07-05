@@ -13,10 +13,15 @@ namespace Module7_TAM
     {
         [FindsBy(How = How.XPath, Using = "//div[text()= 'Вы не вошли в аккаунт']")]
         private IWebElement signedOutText;
-        public IWebElement GetSignedOutText()
+        private IWebElement GetSignedOutText()
         {
             WaitForIsVisible(signedOutText);
             return signedOutText;
+        }
+
+        public bool IsSignedOutTextDisplayed() 
+        {
+            return isElementDisplayed(GetSignedOutText());
         }
     }
 }
