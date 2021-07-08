@@ -28,14 +28,20 @@ namespace Module7_TAM_V2
         {
             try
             {
+                Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(0));
+                var isEnabled =  new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(x => element.Enabled);
                 Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(10));
-                var elementToBeDisplayed = element.Displayed;
+                return isEnabled;
             }
             catch (NoSuchElementException)
             {
                 return false;
             }
-            return true;
+
+            catch (StaleElementReferenceException)
+            {
+                return false;
+            }
         }
         public void JavaScriptClick(IWebElement element)
         {

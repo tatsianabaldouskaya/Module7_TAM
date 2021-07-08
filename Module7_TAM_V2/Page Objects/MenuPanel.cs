@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
 namespace Module7_TAM_V2
 {
-    class MenuPanel:AbstractPage
+    public class MenuPanel:AbstractPage
     {
         [FindsBy(How = How.XPath, Using = "//div[@class='T-I T-I-KE L3']")]
         private IWebElement composeButton;
