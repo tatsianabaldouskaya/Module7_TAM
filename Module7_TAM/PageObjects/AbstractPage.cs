@@ -63,5 +63,11 @@ namespace Module7_TAM
            // WaitForElementClickable(driver, locator);
             driver.FindElement(locator).Click();
         }
+
+        public void JavaScriptClick(By locator)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)driver;
+            executor.ExecuteScript("arguments[0].click();", locator);
+        }
     }
 }

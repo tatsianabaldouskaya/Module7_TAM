@@ -20,10 +20,10 @@ namespace Module7_TAM
         {
             WaitForIsVisible(emailField);
             SendKeys(emailField, email);
-            Click(nextButton);
+            JavaScriptClick(nextButton);
             WaitForIsVisible(passwordField);
             SendKeys(passwordField, password);
-            Click(nextButton);
+            JavaScriptClick(nextButton);
             return new MailBoxPage(driver);
         }
     }

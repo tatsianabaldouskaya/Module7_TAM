@@ -5,13 +5,15 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
-using Module7_TAM.PageObjects;
 using System.Configuration;
 using System.Collections.Specialized;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.PageObjects;
 
-namespace Module7_TAM
+namespace Module7_TAM_V2
 {
     [TestFixture]
+    [Parallelizable]
     class MailBoxTests : BaseTest
     {
         private string email = ConfigurationManager.AppSettings["email"];
@@ -19,22 +21,15 @@ namespace Module7_TAM
         private string addresseeValue = "tatiana95.77@gmail.com";
         private string subjectValue = "For test";
         private string bodyValue = "This is test email";
+        private string urlSent = "https://mail.google.com/mail/u/0/#sent";
+
+        [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
+        public IWebElement starIconActive;
+
         LoginPage loginPage;
         MailBoxPage mailBoxPage;
         MenuPanel menuPanel;
         LogOutPage logOutPage;
-
-        [Test]       
-        public void LoginTest()
-        {
-            loginPage = new LoginPage();
-            mailBoxPage = new MailBoxPage();
-            loginPage
-                .LogIn(email, password)
-                .ClickUserIcon();
-            Assert.AreEqual(email, mailBoxPage.GetActualEmail()
-              , "Login is unsuccessful");                                          
-        }
 
         [Test]
         public void CreateDraftEmailAndSendTest()
@@ -42,13 +37,17 @@ namespace Module7_TAM
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
-            loginPage.LogIn(email, password);
+            loginPage
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
             menuPanel.OpenNewMessageForm();
             mailBoxPage
                 .FillNewMessageFields(addresseeValue, subjectValue, bodyValue)
                 .SaveDraft();
             menuPanel.OpenDraftsFolder();
-            Assert.IsTrue(mailBoxPage.isElementDisplayed(mailBoxPage.GetLetter()), "Draft is not saved");
+            Assert.IsTrue(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter()), "Draft is not saved");
             mailBoxPage.OpenMessage();
             Assert.Multiple(() =>
             {
@@ -60,10 +59,10 @@ namespace Module7_TAM
                     , "Body doesn't correspond to expected");
             });
             mailBoxPage.SendMessage();
-            Assert.IsFalse(mailBoxPage.isElementDisplayed(mailBoxPage.GetLetter())
+            Assert.IsFalse(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter())
                , "Letter is not removed from draft folder");
             menuPanel.OpenSentFolder();
-            Assert.IsTrue(mailBoxPage.isElementDisplayed(mailBoxPage.GetLetter())
+            Assert.IsTrue(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter())
                 , "Letter is absent in send folder");
         }
 
@@ -73,10 +72,100 @@ namespace Module7_TAM
             loginPage = new LoginPage();
             logOutPage = new LogOutPage();
             loginPage
-                .LogIn(email, password)
-                .ClickUserIcon()
-                .ClickSignOut();
-            Assert.IsTrue(logOutPage.isElementDisplayed(logOutPage.GetSignedOutText()), "You are not logged off");           
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
+            mailBoxPage.ClickUserIcon()
+                 .ClickSignOut();
+            Assert.IsTrue(logOutPage.IsElementDisplayed(logOutPage.GetSignedOutText()), "You are not logged off");           
+        }
+
+        //Javascript executor
+        [Test]
+        public void HighlightTest()
+        {
+            loginPage = new LoginPage();
+            mailBoxPage = new MailBoxPage();
+            menuPanel = new MenuPanel();
+            loginPage
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
+            menuPanel.OpenDraftsFolder();
+            Thread.Sleep(5000);
+            menuPanel.OpenSentFolder();
+            Thread.Sleep(5000);
+            //Assert.AreEqual(urlSent, );
+        }
+
+        //Actions with mouse
+        [Test]
+        public void DeleteLetterByHoverTest()
+        {
+            loginPage = new LoginPage();
+            mailBoxPage = new MailBoxPage();
+            menuPanel = new MenuPanel();
+            loginPage
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
+            menuPanel.OpenNewMessageForm();
+            mailBoxPage
+                .FillNewMessageFields(addresseeValue, subjectValue, bodyValue)
+                .SaveDraft();
+            menuPanel.OpenDraftsFolder();
+            Thread.Sleep(3000);
+            mailBoxPage.HoverLetter();
+            mailBoxPage.JsClickDeleteLetter();
+            Thread.Sleep(5000);
+            Assert.IsFalse(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter())
+               ,"Letter is not removed from draft folder");
+        }
+
+        //Test with Driver actions class Mouse
+        [Test]
+        public void DragAndDropToStarredTest()
+        {
+            loginPage = new LoginPage();
+            mailBoxPage = new MailBoxPage();
+            menuPanel = new MenuPanel();
+            loginPage
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
+            menuPanel.OpenNewMessageForm();
+            mailBoxPage
+                .FillNewMessageFields(addresseeValue, subjectValue, bodyValue)
+                .SaveDraft();
+            menuPanel.OpenDraftsFolder();
+            mailBoxPage.DragAndDropToStarred();
+            Assert.IsTrue(mailBoxPage.IsElementDisplayed(starIconActive), "Draft is not saved");
+        }
+       
+        //Test with driver actions Class Keyboard
+        [Test]
+        public void DeleteLetterByRightMouseClickTest()
+        {
+            loginPage = new LoginPage();
+            mailBoxPage = new MailBoxPage();
+            menuPanel = new MenuPanel();
+            loginPage
+                .EnterEmail(email)
+                .ClickNext()
+                .EnterPassword(password)
+                .ClickNext();
+            menuPanel.OpenNewMessageForm();
+            mailBoxPage
+                .FillNewMessageFields(addresseeValue, subjectValue, bodyValue)
+                .SaveDraft();
+            menuPanel.OpenDraftsFolder();
+            mailBoxPage.RightClickLetterAndDelete();
+            Thread.Sleep(5000);
+            Assert.IsFalse(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter()), "Draft is not saved");
         }
     }
 }

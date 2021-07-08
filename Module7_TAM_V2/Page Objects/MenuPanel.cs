@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace Module7_TAM.PageObjects
+namespace Module7_TAM_V2
 {
     class MenuPanel:AbstractPage
     {
@@ -16,8 +16,8 @@ namespace Module7_TAM.PageObjects
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#inbox')]")]
         private IWebElement inboxFolder;
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#starred')]")]
-        private IWebElement starredFolder;
+   //     [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#starred')]")]
+    //    public IWebElement starredFolder;
 
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#snoozed')]")]
         private IWebElement snoozedFolder;
@@ -30,11 +30,14 @@ namespace Module7_TAM.PageObjects
         public MailBoxPage OpenDraftsFolder()
         {
             WaitForIsVisible(draftsFolder).Click();
+            JavaScriptHighlight(draftsFolder);
             return new MailBoxPage();
         }
         public MailBoxPage OpenSentFolder()
         {
             WaitForIsVisible(sentFolder).Click();
+            JavaScriptUnhighlight(draftsFolder);
+            JavaScriptHighlight(sentFolder);
             return new MailBoxPage();
         }
         public MailBoxPage OpenNewMessageForm()
@@ -47,11 +50,11 @@ namespace Module7_TAM.PageObjects
             WaitForIsVisible(snoozedFolder).Click();
             return new MailBoxPage();
         }
-        public MailBoxPage OpenStarredFolder()
-        {
-            WaitForIsVisible(starredFolder).Click();
-            return new MailBoxPage();
-        }
+        //public MailBoxPage OpenStarredFolder()
+        //{
+        //    WaitForIsVisible(starredFolder).Click();
+        //    return new MailBoxPage();
+        //}
         public MailBoxPage OpenInboxFolder()
         {
             WaitForIsVisible(inboxFolder).Click();

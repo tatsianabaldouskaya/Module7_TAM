@@ -7,7 +7,7 @@ using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 
-namespace Module7_TAM
+namespace Module7_TAM_V2
 {
     public class LogOutPage:AbstractPage
     {

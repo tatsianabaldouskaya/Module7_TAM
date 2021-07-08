@@ -9,7 +9,7 @@ using System.Configuration;
 using SeleniumExtras.PageObjects;
 
 
-namespace Module7_TAM
+namespace Module7_TAM_V2
 {
     public class LoginPage : AbstractPage
     {
@@ -21,13 +21,20 @@ namespace Module7_TAM
 
         [FindsBy(How = How.XPath, Using = "//div[@class='FliLIb DL0QTb']//button")]
         private IWebElement nextButton;
-        public MailBoxPage LogIn(string email, string password)
+        public LoginPage EnterEmail(string email)
         {
             WaitForIsVisible(emailField).SendKeys(email);
-            nextButton.Click();
+            return this;
+        }
+        public LoginPage ClickNext()
+        {
+            JavaScriptClick(nextButton);
+            return this;
+        }
+        public LoginPage EnterPassword(string password)
+        {
             WaitForIsVisible(passwordField).SendKeys(password);
-            nextButton.Click();
-            return new MailBoxPage();
+            return this;
         }
     }
 }

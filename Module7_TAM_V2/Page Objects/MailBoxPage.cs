@@ -6,10 +6,12 @@ using OpenQA.Selenium.Chrome;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using OpenQA.Selenium.Interactions;
+using Module7_TAM_V2.WebDriver;
 
-namespace Module7_TAM
+namespace Module7_TAM_V2
 {
-    public class MailBoxPage:AbstractPage
+    public class MailBoxPage: AbstractPage
     {
         [FindsBy(How = How.XPath, Using = "//img[@class='gb_Ca gbii']")]
         private IWebElement userIcon;
@@ -35,7 +37,7 @@ namespace Module7_TAM
         [FindsBy(How = How.XPath, Using = "//div[@class='gb_nb']")]
         private IWebElement actualEmail;
 
-        [FindsBy(How = How.XPath, Using = "//span/span[text() = 'For test']")]
+        [FindsBy(How = How.XPath, Using = "//span[text() = 'For test']//ancestor-or-self::tr[@class='zA yO']")]
         private IWebElement letter;
 
         [FindsBy(How = How.CssSelector, Using = "div.oL>span[email]")]
@@ -46,6 +48,12 @@ namespace Module7_TAM
 
         [FindsBy(How = How.CssSelector, Using = "div.editable")]
         private IWebElement bodyActual;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class = 'BltHke nH oy8Mbf']//ul[@role = 'toolbar']/li[@data-tooltip = 'Delete']")]
+        private IWebElement deleteLetterOnHover;
+
+        [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#starred')]")]
+        public IWebElement starredFolder;
 
         public MailBoxPage ClickUserIcon()
         {
@@ -90,12 +98,44 @@ namespace Module7_TAM
         public MailBoxPage SendMessage()
         {
             sendButton.Click();
+            JavaScriptHighlight(sendButton);
             return this;
         }
         public LogOutPage ClickSignOut()
         {
             WaitForIsVisible(signOutButton).Click();
             return new LogOutPage();
+        }
+        public MailBoxPage HoverLetter()
+        {
+            new Actions(Browser.GetDriver()).MoveToElement(letter).Build().Perform();
+            return this;
+        }
+        public void JsClickDeleteLetter()
+        {
+            JavaScriptClick(deleteLetterOnHover);
+            Thread.Sleep(5000);
+        }
+
+        //mouse action
+        public MailBoxPage DragAndDropToStarred()
+        {
+            Actions builder = new Actions(Browser.GetDriver());
+            builder.DragAndDrop(letter, starredFolder).Perform();
+            return this;
+        }
+
+        //action with Keyboard
+        public MailBoxPage RightClickLetterAndDelete()
+        {
+            WaitForIsVisible(letter);
+            Actions builder = new Actions(Browser.GetDriver());
+            builder.ContextClick(letter).Release()
+                .SendKeys(Keys.ArrowDown)
+                .SendKeys(Keys.ArrowDown)
+                .SendKeys(Keys.Enter)
+                .Perform();
+            return this;
         }
     }
 }

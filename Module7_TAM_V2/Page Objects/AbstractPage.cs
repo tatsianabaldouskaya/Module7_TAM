@@ -8,26 +8,27 @@ using OpenQA.Selenium.Support.UI;
 using System.Linq;
 using SeleniumExtras;
 using SeleniumExtras.PageObjects;
-using Module7_TAM_V2;
+using Module7_TAM_V2.WebDriver;
 
-namespace Module7_TAM
+namespace Module7_TAM_V2
 {
     [TestFixture]
     public abstract class AbstractPage
     {   
         public AbstractPage()
         {
-            PageFactory.InitElements(DriverInstance.GetDriver(), this);
+            PageFactory.InitElements(Browser.GetDriver(), this);
         }
         public IWebElement WaitForIsVisible(IWebElement element)
         {
-            return new WebDriverWait(DriverInstance.GetDriver(), TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+            return new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
         }
 
-        public bool isElementDisplayed(IWebElement element)
+        public bool IsElementDisplayed(IWebElement element)
         {
             try
             {
+                Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(10));
                 var elementToBeDisplayed = element.Displayed;
             }
             catch (NoSuchElementException)
@@ -35,6 +36,24 @@ namespace Module7_TAM
                 return false;
             }
             return true;
-        }           
+        }
+        public void JavaScriptClick(IWebElement element)
+        {
+            IJavaScriptExecutor executor = (IJavaScriptExecutor)Browser.GetDriver();
+            executor.ExecuteScript("arguments[0].click();", element);
+        }
+
+        public IWebElement JavaScriptHighlight(IWebElement element)
+        {
+            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
+            return element;
+        }
+
+        public void JavaScriptUnhighlight(IWebElement element)
+        {
+            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
+        }
     }
 }
