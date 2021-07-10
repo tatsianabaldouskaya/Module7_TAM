@@ -1,10 +1,4 @@
-﻿using System;
-using NUnit;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
+﻿using NUnit.Framework;
 using System.Configuration;
 using Module7_TAM_V2.WebDriver;
 

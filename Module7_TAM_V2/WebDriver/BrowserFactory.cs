@@ -3,10 +3,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module7_TAM_V2.WebDriver
 {
@@ -46,16 +42,12 @@ namespace Module7_TAM_V2.WebDriver
                         FirefoxOptions options = new FirefoxOptions();
                         var browserName =  options.BrowserName;
                         options.AddArguments();
-                        //options.AddAdditionalCapability("firefox", CapabilityType.BrowserName);
-                        //options.AddAdditionalCapability(CapabilityType.Platform, new Platform(PlatformType.Windows));
                         driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options.ToCapabilities());
                         break;
                     }
                 case BrowserType.remoteChrome:
                     {
                         ChromeOptions options = new ChromeOptions();
-                        //options.AddAdditionalCapability(CapabilityType.BrowserName, "chrome");
-                        //options.AddAdditionalCapability(CapabilityType.Platform, new Platform(PlatformType.Windows));
                         driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options.ToCapabilities());
                         break;
                     }

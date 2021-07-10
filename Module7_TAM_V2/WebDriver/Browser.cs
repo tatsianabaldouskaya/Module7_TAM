@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module7_TAM_V2.WebDriver
 {
@@ -20,7 +16,6 @@ namespace Module7_TAM_V2.WebDriver
             Enum.TryParse(browser, out CurrentBrowser);
             driver = BrowserFactory.GetDriver(CurrentBrowser, 10);
         }
-
         public static IWebDriver GetDriver()
         {
             return driver;

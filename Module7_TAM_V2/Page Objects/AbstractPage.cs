@@ -1,12 +1,7 @@
 ﻿using System;
-using NUnit;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
 using OpenQA.Selenium.Support.UI;
-using System.Linq;
-using SeleniumExtras;
 using SeleniumExtras.PageObjects;
 using Module7_TAM_V2.WebDriver;
 
@@ -60,6 +55,17 @@ namespace Module7_TAM_V2
         {
             IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
             js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
+        }
+
+        public bool IsElementHighlighted(IWebElement element)
+        {
+            string color = "rgba(255, 255, 0, 1)";
+            string actColor = element.GetCssValue("background-color");
+            if (color == actColor)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

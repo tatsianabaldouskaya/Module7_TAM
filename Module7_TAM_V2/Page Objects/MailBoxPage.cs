@@ -1,10 +1,4 @@
-﻿using System;
-using NUnit;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
 using Module7_TAM_V2.WebDriver;
@@ -54,7 +48,10 @@ namespace Module7_TAM_V2
         private IWebElement deleteLetterOnHover;
 
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#starred')]")]
-        public IWebElement starredFolder;
+        private IWebElement starredFolder;
+
+        [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
+        public IWebElement starIconActive;
 
         public MailBoxPage ClickUserIcon()
         {
@@ -76,57 +73,47 @@ namespace Module7_TAM_V2
             bodyField.SendKeys(bodyValue);
             return this;
         }
-
         public MenuPanel SaveDraft()
         {
             closeMessageButton.Click();
             return new MenuPanel();
         }
-
         public string GetSavedMessageAddressee()
         {
             WaitForIsVisible(addresseeActual);
             return addresseeActual.Text;
         }
-
         public string GetSavedMessageBody()
         {
             WaitForIsVisible(bodyActual);
             return bodyActual.Text;
         }
-
         public MailBoxPage OpenMessage()
         {
             WaitForIsVisible(letter).Click();
             return this;
         }
-
         public MailBoxPage SendMessage()
         {
             JavaScriptHighlight(sendButton);
             sendButton.Click();
             return this;
         }
-
         public LogOutPage ClickSignOut()
         {
             WaitForIsVisible(signOutButton).Click();
             return new LogOutPage();
         }
-
         public MailBoxPage HoverLetter()
         {
             WaitForIsVisible(letter);
             new Actions(Browser.GetDriver()).MoveToElement(letter).Build().Perform();
             return this;
         }
-
         public void JsClickDeleteLetter()
         {
             JavaScriptClick(deleteLetterOnHover);
         }
-
-        //mouse action
         public MailBoxPage DragAndDropToStarred()
         {
             WaitForIsVisible(letter);
@@ -134,8 +121,6 @@ namespace Module7_TAM_V2
             builder.DragAndDrop(letter, starredFolder).Perform();
             return this;
         }
-
-        //action with Keyboard
         public MailBoxPage RightClickLetterAndDelete()
         {
             WaitForIsVisible(letter);
@@ -147,10 +132,13 @@ namespace Module7_TAM_V2
                 .Perform();
             return this;
         }
-
         public bool IsLetterDisplayed()
         {
             return IsElementDisplayed(letter);
+        }
+        public bool IsStarIconActive()
+        {
+            return IsElementDisplayed(starIconActive);
         }
     }
 }

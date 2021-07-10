@@ -9,7 +9,7 @@ using SeleniumExtras.PageObjects;
 
 namespace Module7_TAM_V2
 {
-    public class LogOutPage:AbstractPage
+    public class LogOutPage : AbstractPage
     {
         [FindsBy(How = How.XPath, Using = "//div[text()= 'Вы не вошли в аккаунт']")]
         private IWebElement signedOutText;
@@ -17,6 +17,10 @@ namespace Module7_TAM_V2
         {
             WaitForIsVisible(signedOutText);
             return signedOutText;
+        }
+        public bool IsSignedOutTextDisplayed()
+        {
+            return IsElementDisplayed(signedOutText);
         }
     }
 }

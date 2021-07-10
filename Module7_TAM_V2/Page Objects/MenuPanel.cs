@@ -11,9 +11,6 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#inbox')]")]
         private IWebElement inboxFolder;
 
-   //     [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#starred')]")]
-    //    public IWebElement starredFolder;
-
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#snoozed')]")]
         private IWebElement snoozedFolder;
 
@@ -24,17 +21,35 @@ namespace Module7_TAM_V2
         private IWebElement draftsFolder;
         public MailBoxPage OpenDraftsFolder()
         {
-            WaitForIsVisible(draftsFolder).Click();
+            WaitForIsVisible(draftsFolder).Click();          
+            return new MailBoxPage();
+        }
+        public MailBoxPage HighlightDraftsFolder()
+        {
             JavaScriptHighlight(draftsFolder);
             return new MailBoxPage();
         }
         public MailBoxPage OpenSentFolder()
         {
             WaitForIsVisible(sentFolder).Click();
+            return new MailBoxPage();
+        }
+        public MailBoxPage HighlightSentFolder()
+        {
             JavaScriptUnhighlight(draftsFolder);
             JavaScriptHighlight(sentFolder);
             return new MailBoxPage();
         }
+
+        public bool IsDraftFolderHighlighted()
+        {
+            return IsElementHighlighted(draftsFolder);
+        }
+        public bool IsSentFolderHighlighted()
+        {
+            return IsElementHighlighted(sentFolder);
+        }
+
         public MailBoxPage OpenNewMessageForm()
         {
             WaitForIsVisible(composeButton).Click();
@@ -45,11 +60,7 @@ namespace Module7_TAM_V2
             WaitForIsVisible(snoozedFolder).Click();
             return new MailBoxPage();
         }
-        //public MailBoxPage OpenStarredFolder()
-        //{
-        //    WaitForIsVisible(starredFolder).Click();
-        //    return new MailBoxPage();
-        //}
+
         public MailBoxPage OpenInboxFolder()
         {
             WaitForIsVisible(inboxFolder).Click();

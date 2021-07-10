@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System.Threading;
 using System.Configuration;
 
 namespace Module7_TAM_V2
@@ -13,7 +12,6 @@ namespace Module7_TAM_V2
         private string addresseeValue = "tatiana95.77@gmail.com";
         private string subjectValue = "For test";
         private string bodyValue = "This is test email";
-        private string urlSent = "https://mail.google.com/mail/u/0/#sent";
 
         private LoginPage loginPage;
         private MailBoxPage mailBoxPage;
@@ -46,7 +44,6 @@ namespace Module7_TAM_V2
                     "Body doesn't correspond to expected");
             });
             var sentMessage = message.SendMessage();
-            // check here that "Message set is shown" on the page
             sentMessage = menuPanel.OpenSentFolder();
             Assert.IsTrue(sentMessage.IsLetterDisplayed(),
                 "Letter is absent in send folder");
@@ -64,11 +61,9 @@ namespace Module7_TAM_V2
                 .ClickNext();
             logOutPage = mailBoxPage.ClickUserIcon()
                  .ClickSignOut();
-            //refactor the assert
-            //Assert.IsTrue(logOutPage.IsElementDisplayed(logOutPage.GetSignedOutText()), "You are not logged off");           
+            Assert.IsTrue(logOutPage.IsSignedOutTextDisplayed(), "You are not logged off");           
         }
 
-        //Javascript executor
         [Test]
         public void HighlightTest()
         {
@@ -80,13 +75,17 @@ namespace Module7_TAM_V2
                 .EnterPassword(password)
                 .ClickNext();
             menuPanel.OpenDraftsFolder();
-            //invoke highlight method
-            //add assert
+            menuPanel.HighlightDraftsFolder();
+            Assert.IsTrue(menuPanel.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
             menuPanel.OpenSentFolder();
-            //Assert.AreEqual(urlSent, );
+            menuPanel.HighlightSentFolder();
+            Assert.Multiple(() =>
+            {
+                Assert.IsFalse(menuPanel.IsDraftFolderHighlighted(), "Draft folder is highlighted");
+                Assert.IsTrue(menuPanel.IsSentFolderHighlighted(), "Sent folder is not highlighted");
+            });               
         }
 
-        //Actions with mouse
         [Test]
         public void DeleteLetterByHoverTest()
         {
@@ -103,12 +102,10 @@ namespace Module7_TAM_V2
                 .OpenDraftsFolder()
                 .HoverLetter()
                 .JsClickDeleteLetter();
-            //refactor the assert
-            //Assert.IsFalse(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter())
-            // ,"Letter is not removed from draft folder");
+            Assert.IsFalse(mailBoxPage.IsLetterDisplayed()
+             ,"Letter is not removed from draft folder");
         }
 
-        //Test with Driver actions class Mouse
         [Test]
         public void DragAndDropToStarredTest()
         {
@@ -124,11 +121,9 @@ namespace Module7_TAM_V2
                 .SaveDraft()
                 .OpenDraftsFolder()
                 .DragAndDropToStarred();
-            //refactor the assert
-            //Assert.IsTrue(mailBoxPage.IsElementDisplayed(starIconActive), "Draft is not saved");
+            Assert.IsTrue(mailBoxPage.IsStarIconActive(), "Draft is not saved");
         }
        
-        //Test with driver actions Class Keyboard
         [Test]
         public void DeleteLetterByRightMouseClickTest()
         {
@@ -145,8 +140,7 @@ namespace Module7_TAM_V2
                 .SaveDraft()
                 .OpenDraftsFolder()
                 .RightClickLetterAndDelete();
-            //refactor the assert
-            //Assert.IsFalse(mailBoxPage.IsElementDisplayed(mailBoxPage.GetLetter()), "Draft is not saved");
+            Assert.IsFalse(mailBoxPage.IsLetterDisplayed(), "Draft is not saved");
         }
     }
 }
