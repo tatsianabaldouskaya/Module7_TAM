@@ -74,15 +74,13 @@ namespace Module7_TAM_V2
                 .ClickNext()
                 .EnterPassword(password)
                 .ClickNext();
-            menuPanel.OpenDraftsFolder();
-            menuPanel.HighlightDraftsFolder();
-            Assert.IsTrue(menuPanel.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
-            menuPanel.OpenSentFolder();
-            menuPanel.HighlightSentFolder();
+            var highlightedFolder = menuPanel.HighlightDraftsFolder();
+            Assert.IsTrue(highlightedFolder.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
+            var highlightedSentFolder = highlightedFolder.HighlightSentFolder();
             Assert.Multiple(() =>
             {
-                Assert.IsFalse(menuPanel.IsDraftFolderHighlighted(), "Draft folder is highlighted");
-                Assert.IsTrue(menuPanel.IsSentFolderHighlighted(), "Sent folder is not highlighted");
+                Assert.IsFalse(highlightedSentFolder.IsDraftFolderHighlighted(), "Draft folder is highlighted");
+                Assert.IsTrue(highlightedSentFolder.IsSentFolderHighlighted(), "Sent folder is not highlighted");
             });               
         }
 
