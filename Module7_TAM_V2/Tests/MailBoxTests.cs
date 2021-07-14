@@ -84,7 +84,7 @@ namespace Module7_TAM_V2
             {
                 Assert.IsFalse(menuPanel.IsDraftFolderHighlighted(), "Draft folder is highlighted");
                 Assert.IsTrue(menuPanel.IsSentFolderHighlighted(), "Sent folder is not highlighted");
-            });
+            });               
         }
 
         [Test]

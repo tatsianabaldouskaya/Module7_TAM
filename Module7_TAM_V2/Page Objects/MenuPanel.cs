@@ -24,23 +24,31 @@ namespace Module7_TAM_V2
             WaitForIsVisible(draftsFolder).Click();          
             return new MailBoxPage();
         }
-        public MailBoxPage HighlightDraftsFolder()
+        public MenuPanel HighlightDraftsFolder()
         {
             WaitForIsVisible(draftsFolder).Click();
             JavaScriptHighlight(draftsFolder);
+            return this;
+        }
+
+        public MailBoxPage GoToMailBox()
+        {
+            WaitForIsVisible(draftsFolder).Click();
             return new MailBoxPage();
         }
+
         public MailBoxPage OpenSentFolder()
         {
             WaitForIsVisible(sentFolder).Click();
             return new MailBoxPage();
         }
-        public MailBoxPage HighlightSentFolder()
+
+        public MenuPanel HighlightSentFolder()
         {
             WaitForIsVisible(sentFolder).Click();
             JavaScriptUnhighlight(draftsFolder);
             JavaScriptHighlight(sentFolder);
-            return new MailBoxPage();
+            return this;
         }
 
         public bool IsDraftFolderHighlighted()
