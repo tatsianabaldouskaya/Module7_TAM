@@ -10,6 +10,8 @@ namespace Module7_TAM_V2
         private string baseUrl = ConfigurationManager.AppSettings.Get("baseUrl");
         protected static Browser Browser = Browser.Instance;
 
+        public TestContext TestContext {get; set;}
+
         [SetUp]
         public void SetUp()
         {

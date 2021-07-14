@@ -80,15 +80,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseTest.cs" />
+    <Compile Include="Model\Message.cs" />
+    <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\Randomizer.cs" />
     <Compile Include="WebDriver\Browser.cs" />
     <Compile Include="WebDriver\BrowserFactory.cs" />
-    <Compile Include="Driver\DriverInstance.cs" />
     <Compile Include="Page Objects\AbstractPage.cs" />
     <Compile Include="Page Objects\LoginPage.cs" />
     <Compile Include="Page Objects\LogOutPage.cs" />
     <Compile Include="Page Objects\MailBoxPage.cs" />
-    <Compile Include="MailBoxTests.cs" />
+    <Compile Include="Tests\MailBoxTests.cs" />
     <Compile Include="Page Objects\MenuPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebDriver\Configuration.cs" />
@@ -96,6 +99,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Resources\MessageData.xlsx" />
+    <None Include="Resources\UserData.xlsx" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

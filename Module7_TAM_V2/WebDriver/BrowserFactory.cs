@@ -48,6 +48,7 @@ namespace Module7_TAM_V2.WebDriver
                 case BrowserType.remoteChrome:
                     {
                         ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("--no-sandbox");
                         driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), options.ToCapabilities());
                         break;
                     }

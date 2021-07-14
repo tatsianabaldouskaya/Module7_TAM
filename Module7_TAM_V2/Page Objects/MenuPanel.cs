@@ -26,6 +26,7 @@ namespace Module7_TAM_V2
         }
         public MailBoxPage HighlightDraftsFolder()
         {
+            WaitForIsVisible(draftsFolder).Click();
             JavaScriptHighlight(draftsFolder);
             return new MailBoxPage();
         }
@@ -36,6 +37,7 @@ namespace Module7_TAM_V2
         }
         public MailBoxPage HighlightSentFolder()
         {
+            WaitForIsVisible(sentFolder).Click();
             JavaScriptUnhighlight(draftsFolder);
             JavaScriptHighlight(sentFolder);
             return new MailBoxPage();

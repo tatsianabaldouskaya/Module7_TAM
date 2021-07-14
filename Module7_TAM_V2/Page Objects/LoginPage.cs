@@ -7,7 +7,7 @@ using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using System.Configuration;
 using SeleniumExtras.PageObjects;
-
+using Module7_TAM_V2.Model;
 
 namespace Module7_TAM_V2
 {
@@ -21,20 +21,14 @@ namespace Module7_TAM_V2
 
         [FindsBy(How = How.XPath, Using = "//div[@class='FliLIb DL0QTb']//button")]
         private IWebElement nextButton;
-        public LoginPage EnterEmail(string email)
+
+        public MailBoxPage Login(User user)
         {
-            WaitForIsVisible(emailField).SendKeys(email);
-            return this;
-        }
-        public LoginPage ClickNext()
-        {
+            WaitForIsVisible(emailField).SendKeys(user.email);
             JavaScriptClick(nextButton);
-            return this;
-        }
-        public LoginPage EnterPassword(string password)
-        {
-            WaitForIsVisible(passwordField).SendKeys(password);
-            return this;
+            WaitForIsVisible(passwordField).SendKeys(user.password);
+            JavaScriptClick(nextButton);
+            return new MailBoxPage();
         }
     }
 }

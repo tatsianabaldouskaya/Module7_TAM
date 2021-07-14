@@ -2,6 +2,7 @@
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
 using Module7_TAM_V2.WebDriver;
+using Module7_TAM_V2.Model;
 
 namespace Module7_TAM_V2
 {
@@ -66,11 +67,11 @@ namespace Module7_TAM_V2
 
         public string GetActualSubject() => subjectActual.GetAttribute("value");
         
-        public MailBoxPage FillNewMessageFields(string addresseeValue, string subjectValue, string bodyValue)
+        public MailBoxPage FillNewMessageFields(Message message)
         {
-            WaitForIsVisible(addresseeField).SendKeys(addresseeValue);
-            subjectField.SendKeys(subjectValue);
-            bodyField.SendKeys(bodyValue);
+            WaitForIsVisible(addresseeField).SendKeys(message.addresseeValue);
+            subjectField.SendKeys(message.subjectValue);
+            bodyField.SendKeys(message.bodyValue);
             return this;
         }
         public MenuPanel SaveDraft()
