@@ -77,13 +77,13 @@ namespace Module7_TAM_V2
             loginPage = new LoginPage();
             menuPanel = new MenuPanel();
             loginPage.Login(user);
-            menuPanel.HighlightDraftsFolder();
-            Assert.IsTrue(menuPanel.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
-            menuPanel.HighlightSentFolder();
+            var highlightedFolder = menuPanel.HighlightDraftsFolder();
+            Assert.IsTrue(highlightedFolder.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
+            var highlightedSentFolder = highlightedFolder.HighlightSentFolder();
             Assert.Multiple(() =>
             {
-                Assert.IsFalse(menuPanel.IsDraftFolderHighlighted(), "Draft folder is highlighted");
-                Assert.IsTrue(menuPanel.IsSentFolderHighlighted(), "Sent folder is not highlighted");
+                Assert.IsFalse(highlightedSentFolder.IsDraftFolderHighlighted(), "Draft folder is highlighted");
+                Assert.IsTrue(highlightedSentFolder.IsSentFolderHighlighted(), "Sent folder is not highlighted");
             });               
         }
 
