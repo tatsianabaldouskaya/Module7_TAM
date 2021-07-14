@@ -83,8 +83,8 @@
     <Compile Include="Model\Message.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Randomizer.cs" />
+    <Compile Include="Utils\Screenshoter.cs" />
     <Compile Include="WebDriver\Browser.cs" />
     <Compile Include="WebDriver\BrowserFactory.cs" />
     <Compile Include="Page Objects\AbstractPage.cs" />

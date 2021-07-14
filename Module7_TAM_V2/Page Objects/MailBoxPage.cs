@@ -3,6 +3,7 @@ using SeleniumExtras.PageObjects;
 using OpenQA.Selenium.Interactions;
 using Module7_TAM_V2.WebDriver;
 using Module7_TAM_V2.Model;
+using Module7_TAM_V2.Utils;
 
 namespace Module7_TAM_V2
 {
@@ -54,6 +55,8 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
         public IWebElement starIconActive;
 
+        private string bodyValue = Randomizer.RandomString(10, true);
+
         public MailBoxPage ClickUserIcon()
         {
             WaitForIsVisible(userIcon).Click();
@@ -71,7 +74,7 @@ namespace Module7_TAM_V2
         {
             WaitForIsVisible(addresseeField).SendKeys(message.addresseeValue);
             subjectField.SendKeys(message.subjectValue);
-            bodyField.SendKeys(message.bodyValue);
+            bodyField.SendKeys(bodyValue);
             return this;
         }
         public MenuPanel SaveDraft()
@@ -111,9 +114,10 @@ namespace Module7_TAM_V2
             new Actions(Browser.GetDriver()).MoveToElement(letter).Build().Perform();
             return this;
         }
-        public void JsClickDeleteLetter()
+        public MailBoxPage JsClickDeleteLetter()
         {
             JavaScriptClick(deleteLetterOnHover);
+            return this;
         }
         public MailBoxPage DragAndDropToStarred()
         {

@@ -1,6 +1,8 @@
 ﻿using Module7_TAM_V2.Model;
 using NUnit.Framework;
 using System.Configuration;
+using Module7_TAM_V2.Utils;
+using System;
 
 namespace Module7_TAM_V2
 {
@@ -23,9 +25,9 @@ namespace Module7_TAM_V2
         {
             var user = new User(email, password);
             loginPage = new LoginPage();
-            loginPage.Login(user)
-            .ClickUserIcon();
-            Assert.AreEqual(email, mailBoxPage.GetActualEmail()
+            loginPage.Login(user);
+            var userIcon = mailBoxPage.ClickUserIcon();           
+            Assert.AreEqual(email, userIcon.GetActualEmail()
               , "Login is unsuccessful");
         }
 
@@ -52,6 +54,7 @@ namespace Module7_TAM_V2
                 Assert.AreEqual(bodyValue, savedMessage.GetSavedMessageBody(),
                     "Body doesn't correspond to expected");
             });
+            Screenshoter.GetScreenshot();
             var sentMessage = savedMessage.SendMessage();
             sentMessage = menuPanel.OpenSentFolder();
             Assert.IsTrue(sentMessage.IsLetterDisplayed(),
@@ -97,11 +100,11 @@ namespace Module7_TAM_V2
             loginPage.Login(user);
             menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
-                .SaveDraft()
-                .OpenDraftsFolder()
+                .SaveDraft();
+            var letter = menuPanel.OpenDraftsFolder()
                 .HoverLetter()
                 .JsClickDeleteLetter();
-            Assert.IsFalse(mailBoxPage.IsLetterDisplayed()
+            Assert.IsFalse(letter.IsLetterDisplayed()
              , "Letter is not removed from draft folder");
         }
 
@@ -130,12 +133,12 @@ namespace Module7_TAM_V2
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
             loginPage.Login(user);
-            var letter = menuPanel.OpenNewMessageForm()
+            menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
-                .SaveDraft()
-                .OpenDraftsFolder()
+                .SaveDraft(); ;
+            var letter = menuPanel.OpenDraftsFolder()
                 .RightClickLetterAndDelete();
-            Assert.IsFalse(letter.IsLetterDisplayed(), "Draft is not saved");
+            Assert.IsFalse(letter.IsLetterDisplayed(), "Draft is not deleted");
         }
     }
 }
