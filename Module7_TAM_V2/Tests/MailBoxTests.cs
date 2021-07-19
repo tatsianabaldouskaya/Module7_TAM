@@ -11,11 +11,11 @@ namespace Module7_TAM_V2
     [Parallelizable]
     class MailBoxTests : BaseTest
     {
-        private string email = ConfigurationManager.AppSettings["email"];
-        private string password = ConfigurationManager.AppSettings["password"];
-        private string addresseeValue = ConfigurationManager.AppSettings["addresseeValue"];
-        private string subjectValue = ConfigurationManager.AppSettings["subjectValue"];
-        private string bodyValue = ConfigurationManager.AppSettings["bodyValue"];
+        private string email = UserData.email;
+        private string password = UserData.password;
+        private string addresseeValue = MessageData.addresseeValue;
+        private string subjectValue = MessageData.subjectValue;
+        private string bodyValue = MessageData.bodyValue;
 
         private LoginPage loginPage;
         private MailBoxPage mailBoxPage;
@@ -35,6 +35,7 @@ namespace Module7_TAM_V2
         [Test]
         public void CreateDraftEmailAndSendTest()
         {
+            var bodyValue = Randomizer.RandomString(10, true);
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
             loginPage = new LoginPage();
@@ -48,11 +49,11 @@ namespace Module7_TAM_V2
             var savedMessage = mailBoxPage.OpenMessage();
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(addresseeValue, savedMessage.GetSavedMessageAddressee(),
+                Assert.AreEqual(message.addresseeValue, savedMessage.GetSavedMessageAddressee(),
                     "Addressee doesn't correspond to expected");
-                Assert.AreEqual(subjectValue, savedMessage.GetActualSubject(),
+                Assert.AreEqual(message.subjectValue, savedMessage.GetActualSubject(),
                     "Subject doesn't correspond to expected");
-                Assert.AreEqual(bodyValue, savedMessage.GetSavedMessageBody(),
+                Assert.AreEqual(message.bodyValue, savedMessage.GetSavedMessageBody(),
                     "Body doesn't correspond to expected");
             });
             Screenshoter.GetScreenshot();
@@ -135,10 +136,10 @@ namespace Module7_TAM_V2
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
             loginPage.Login(user);
-            menuPanel.OpenNewMessageForm()
+            var draftEmail =  menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
                 .SaveDraft(); ;
-            var letter = menuPanel.OpenDraftsFolder()
+            var letter = draftEmail.OpenDraftsFolder()
                 .RightClickLetterAndDelete();
             Assert.IsFalse(letter.IsLetterDisplayed(), "Draft is not deleted");
         }
