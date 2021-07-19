@@ -55,8 +55,6 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
         public IWebElement starIconActive;
 
-        private string bodyValue = Randomizer.RandomString(10, true);
-
         public MailBoxPage ClickUserIcon()
         {
             WaitForIsVisible(userIcon).Click();
@@ -74,7 +72,7 @@ namespace Module7_TAM_V2
         {
             WaitForIsVisible(addresseeField).SendKeys(message.addresseeValue);
             subjectField.SendKeys(message.subjectValue);
-            bodyField.SendKeys(bodyValue);
+            bodyField.SendKeys(message.bodyValue);
             return this;
         }
         public MenuPanel SaveDraft()

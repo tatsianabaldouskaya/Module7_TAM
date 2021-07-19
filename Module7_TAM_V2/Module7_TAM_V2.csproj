@@ -80,9 +80,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Model\Message.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="UserData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Randomizer.cs" />
     <Compile Include="Utils\Screenshoter.cs" />
     <Compile Include="WebDriver\Browser.cs" />
@@ -102,7 +112,16 @@
     <None Include="Resources\MessageData.xlsx" />
     <None Include="Resources\UserData.xlsx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="MessageData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.91.0.4472.10100\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.91.0.4472.10100\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
