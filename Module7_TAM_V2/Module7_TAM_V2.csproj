@@ -81,8 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Message.cs" />
+    <Compile Include="States\State.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Utils\ExceptionHandler.cs" />
     <Compile Include="Utils\Randomizer.cs" />
     <Compile Include="Utils\Screenshoter.cs" />
     <Compile Include="WebDriver\Browser.cs" />

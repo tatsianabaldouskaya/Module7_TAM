@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using Module7_TAM_V2.WebDriver;
+using ExceptionHandler = Module7_TAM_V2.Utils.ExceptionHandler;
 
 namespace Module7_TAM_V2
 {
@@ -28,13 +29,15 @@ namespace Module7_TAM_V2
                 Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(10));
                 return isEnabled;
             }
-            catch (NoSuchElementException)
+            catch (NoSuchElementException ex)
             {
+                ExceptionHandler.Instance.WriteExceptionLog(ex);
                 return false;
             }
 
-            catch (StaleElementReferenceException)
+            catch (StaleElementReferenceException ex)
             {
+                ExceptionHandler.Instance.WriteExceptionLog(ex);
                 return false;
             }
         }
@@ -44,28 +47,28 @@ namespace Module7_TAM_V2
             executor.ExecuteScript("arguments[0].click();", element);
         }
 
-        public IWebElement JavaScriptHighlight(IWebElement element)
-        {
-            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
-            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
-            return element;
-        }
+        //public IWebElement JavaScriptHighlight(IWebElement element)
+        //{
+        //    IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+        //    js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
+        //    return element;
+        //}
 
-        public void JavaScriptUnhighlight(IWebElement element)
-        {
-            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
-            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
-        }
+        //public void JavaScriptUnhighlight(IWebElement element)
+        //{
+        //    IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+        //    js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
+        //}
 
-        public bool IsElementHighlighted(IWebElement element)
-        {
-            string color = "rgba(255, 255, 0, 1)";
-            string actColor = element.GetCssValue("background-color");
-            if (color == actColor)
-            {
-                return true;
-            }
-            else return false;
-        }
+        //public bool IsElementHighlighted(IWebElement element)
+        //{
+        //    string color = "rgba(255, 255, 0, 1)";
+        //    string actColor = element.GetCssValue("background-color");
+        //    if (color == actColor)
+        //    {
+        //        return true;
+        //    }
+        //    else return false;
+        //}
     }
 }

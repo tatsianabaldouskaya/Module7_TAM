@@ -99,7 +99,6 @@ namespace Module7_TAM_V2
         }
         public MailBoxPage SendMessage()
         {
-            JavaScriptHighlight(sendButton);
             sendButton.Click();
             return this;
         }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Module7_TAM_V2.States;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
 namespace Module7_TAM_V2
@@ -26,8 +27,9 @@ namespace Module7_TAM_V2
         }
         public MenuPanel HighlightDraftsFolder()
         {
+            var folder = new Folder(FolderState.Unhighlighted);
             WaitForIsVisible(draftsFolder).Click();
-            JavaScriptHighlight(draftsFolder);
+            folder.JavaScriptHighlight(draftsFolder);
             return this;
         }
 
@@ -45,20 +47,21 @@ namespace Module7_TAM_V2
 
         public MenuPanel HighlightSentFolder()
         {
+            var folder = new Folder(FolderState.Highlighted);
             WaitForIsVisible(sentFolder).Click();
-            JavaScriptUnhighlight(draftsFolder);
-            JavaScriptHighlight(sentFolder);
+            folder.JavaScriptUnhighlight(draftsFolder);
+            folder.JavaScriptHighlight(sentFolder);
             return this;
         }
 
-        public bool IsDraftFolderHighlighted()
-        {
-            return IsElementHighlighted(draftsFolder);
-        }
-        public bool IsSentFolderHighlighted()
-        {
-            return IsElementHighlighted(sentFolder);
-        }
+        //public bool IsDraftFolderHighlighted()
+        //{
+        //    return IsElementHighlighted(draftsFolder);
+        //}
+        //public bool IsSentFolderHighlighted()
+        //{
+        //    return IsElementHighlighted(sentFolder);
+        //}
 
         public MailBoxPage OpenNewMessageForm()
         {
