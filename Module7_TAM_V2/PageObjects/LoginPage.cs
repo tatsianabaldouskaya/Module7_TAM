@@ -8,6 +8,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Configuration;
 using SeleniumExtras.PageObjects;
 using Module7_TAM_V2.Model;
+using Module7_TAM_V2.Elements;
 
 namespace Module7_TAM_V2
 {
@@ -29,6 +30,18 @@ namespace Module7_TAM_V2
             WaitForIsVisible(passwordField).SendKeys(user.password);
             JavaScriptClick(nextButton);
             return new MailBoxPage();
+        }
+
+        public LoginPage EnterEmail(User user)
+        {
+            WaitForIsVisible(emailField).SendKeys(user.email);
+            return this;
+        }
+
+        public LoginPage EnterPassword(User user)
+        {
+            WaitForIsVisible(emailField).SendKeys(user.password);
+            return this;
         }
     }
 }

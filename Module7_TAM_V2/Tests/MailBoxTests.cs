@@ -4,6 +4,9 @@ using System.Configuration;
 using Module7_TAM_V2.Utils;
 using System;
 using System.Threading;
+using Module7_TAM_V2.States;
+using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium;
 
 namespace Module7_TAM_V2
 {
@@ -16,20 +19,14 @@ namespace Module7_TAM_V2
         private string addresseeValue = MessageData.addresseeValue;
         private string subjectValue = MessageData.subjectValue;
         private string bodyValue = MessageData.bodyValue;
-
-        private LoginPage loginPage;
-        private MailBoxPage mailBoxPage;
-        private MenuPanel menuPanel;
-
         [Test]
         public void LoginTest()
         {
             var user = new User(email, password);
-            loginPage = new LoginPage();
             loginPage.Login(user);
             var userIcon = mailBoxPage.ClickUserIcon();           
-            Assert.AreEqual(email, userIcon.GetActualEmail()
-              , "Login is unsuccessful");
+            Assert.AreEqual(email, userIcon.GetActualEmail(),
+                "Login is unsuccessful");
         }
 
         [Test]
@@ -38,8 +35,6 @@ namespace Module7_TAM_V2
             var bodyValue = Randomizer.RandomString(10, true);
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
-            loginPage = new LoginPage();
-            menuPanel = new MenuPanel();
             loginPage.Login(user);
             mailBoxPage = menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
@@ -67,11 +62,9 @@ namespace Module7_TAM_V2
         public void LogoutTest()
         {
             var user = new User(email, password);
-            loginPage = new LoginPage();
-            mailBoxPage = new MailBoxPage();
             loginPage.Login(user);
             var signedOutText = mailBoxPage.ClickUserIcon()
-                 .ClickSignOut(); 
+                 .ClickSignOut();
             Assert.IsTrue(signedOutText.IsSignedOutTextDisplayed(), "You are not logged off");
         }
 
@@ -79,18 +72,17 @@ namespace Module7_TAM_V2
         public void HighlightTest()
         {
             var user = new User(email, password);
-            loginPage = new LoginPage();
-            menuPanel = new MenuPanel();
             loginPage.Login(user);
-            var highlightedFolder = menuPanel.HighlightDraftsFolder();
-            Thread.Sleep(5000);
-            //Assert.IsTrue(highlightedFolder.IsDraftFolderHighlighted(), "Draft folder is not highlighted");
-            //var highlightedSentFolder = highlightedFolder.HighlightSentFolder();
-            //Assert.Multiple(() =>
-            //{
-            //    Assert.IsFalse(highlightedSentFolder.IsDraftFolderHighlighted(), "Draft folder is highlighted");
-            //    Assert.IsTrue(highlightedSentFolder.IsSentFolderHighlighted(), "Sent folder is not highlighted");
-            //});               
+            var folder = new Folder();
+            folder.HighlightFolder(menuPanel.GetDraftsFolder());
+            Assert.AreEqual(FolderState.Highlighted, folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is not highlighted");
+            folder.UnhighlightFolder(menuPanel.GetDraftsFolder());
+            folder.HighlightFolder(menuPanel.GetSentFolder());
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(FolderState.Unhighlighted, folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is highlighted");
+                Assert.AreEqual(FolderState.Highlighted, folder.CheckCurrentState(menuPanel.GetSentFolder()), "Sent folder is not highlighted");
+            });
         }
 
         [Test]
@@ -98,8 +90,6 @@ namespace Module7_TAM_V2
         {
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
-            loginPage = new LoginPage();
-            menuPanel = new MenuPanel();
             loginPage.Login(user);
             menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
@@ -116,8 +106,6 @@ namespace Module7_TAM_V2
         {
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
-            loginPage = new LoginPage();
-            menuPanel = new MenuPanel();
             loginPage.Login(user);
             var starIcon = menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
@@ -132,11 +120,8 @@ namespace Module7_TAM_V2
         {
             var message = new Message(addresseeValue, subjectValue, bodyValue);
             var user = new User(email, password);
-            loginPage = new LoginPage();
-            mailBoxPage = new MailBoxPage();
-            menuPanel = new MenuPanel();
             loginPage.Login(user);
-            var draftEmail =  menuPanel.OpenNewMessageForm()
+            var draftEmail = menuPanel.OpenNewMessageForm()
                 .FillNewMessageFields(message)
                 .SaveDraft(); ;
             var letter = draftEmail.OpenDraftsFolder()
