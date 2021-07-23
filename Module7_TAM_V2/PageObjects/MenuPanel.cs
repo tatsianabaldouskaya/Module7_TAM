@@ -20,7 +20,7 @@ namespace Module7_TAM_V2
         public IWebElement sentFolder;
 
         [FindsBy(How = How.XPath, Using = "//a[contains(@href,'#drafts')]")]
-        public IWebElement draftsFolder;
+        private IWebElement draftsFolder;
         
         
         public MailBoxPage OpenDraftsFolder()

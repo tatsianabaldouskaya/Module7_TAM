@@ -17,7 +17,8 @@ namespace Module7_TAM_V2.States
 
         public FolderState CheckCurrentState(IWebElement element)
         {
-            return state = (element.GetCssValue("background-color") == "rgba(255, 255, 0, 1)") ? FolderState.Highlighted : FolderState.Unhighlighted;
+
+            return state = element.GetCssValue("background-color") == "rgba(255, 255, 0, 1)" ? FolderState.Highlighted : FolderState.Unhighlighted;
         }
 
         public FolderState HighlightFolder(IWebElement element)
@@ -27,29 +28,20 @@ namespace Module7_TAM_V2.States
             if (CheckCurrentState(element) == FolderState.Unhighlighted)
             {
                 js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
-                CheckCurrentState(element);
-                return state;
             }
-            else
-            {
-                return state;
-            }
+            return FolderState.Highlighted;
         }
 
-        public Enum UnhighlightFolder(IWebElement element)
+        public FolderState UnhighlightFolder(IWebElement element)
         {
             IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
 
             if (CheckCurrentState(element) == FolderState.Highlighted)
             {
                 js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
-                CheckCurrentState(element);
-                return state;
             }
-            else
-            {
-                return state;
-            }
+
+            return FolderState.Unhighlighted;
         }
     }
 }

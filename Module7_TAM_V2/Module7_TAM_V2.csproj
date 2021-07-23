@@ -96,6 +96,10 @@
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="States\Enum.cs" />
     <Compile Include="States\Folder.cs" />
+    <Compile Include="States\FolderD.cs" />
+    <Compile Include="States\HighlightedState.cs" />
+    <Compile Include="States\State.cs" />
+    <Compile Include="States\UnhighlightedState.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="UserData.Designer.cs">
