@@ -10,20 +10,15 @@ namespace Module7_TAM_V2
     {
         private string baseUrl = ConfigurationManager.AppSettings.Get("baseUrl");
         protected static Browser Browser = Browser.Instance;
-        protected LoginPage loginPage;
-        protected MailBoxPage mailBoxPage;
-        protected MenuPanel menuPanel;
+
 
         public TestContext TestContext {get; set;}
 
         [SetUp]
         public void SetUp()
         {
-            Browser = Browser.Instance;
+            Browser Browser = Browser.Instance;
             Browser.OpenStartPage(baseUrl);
-            loginPage = new LoginPage();
-            mailBoxPage = new MailBoxPage();
-            menuPanel = new MenuPanel();
         }
 
         [TearDown]

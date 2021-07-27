@@ -8,11 +8,6 @@ namespace Module7_TAM_V2.States
 {   
     public class Folder
     {
-        //public FolderState State { get; set; }
-        //public Folder()
-        //{
-        //    State = state;
-        //}
         private FolderState state;
 
         public FolderState CheckCurrentState(IWebElement element)
@@ -27,29 +22,22 @@ namespace Module7_TAM_V2.States
             if (CheckCurrentState(element) == FolderState.Unhighlighted)
             {
                 js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
-                CheckCurrentState(element);
-                return state;
             }
-            else
-            {
-                return state;
-            }
+
+                return FolderState.Highlighted;
         }
 
-        public Enum UnhighlightFolder(IWebElement element)
+        public FolderState UnhighlightFolder(IWebElement element)
         {
             IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
 
             if (CheckCurrentState(element) == FolderState.Highlighted)
             {
                 js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
-                CheckCurrentState(element);
-                return state;
             }
-            else
-            {
-                return state;
-            }
+
+               return FolderState.Unhighlighted;
+            
         }
     }
 }
