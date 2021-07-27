@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Module7_TAM_V2.WebDriver;
+using OpenQA.Selenium;
 
 namespace Module7_TAM_V2.States
 {
@@ -11,17 +8,22 @@ namespace Module7_TAM_V2.States
         public HighlightedState(State state)
         {
             this.folderD = state.FolderD;
+            level = 1;
         }
 
-        public override void Highlight()
+        public override void Highlight(IWebElement element)
         {
             level = 1;
+            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
             StateChangeCheck();
         }
 
-        public override void UnHighlight()
+        public override void UnHighlight(IWebElement element)
         {
             level = 0;
+            IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
+            js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", element);
             StateChangeCheck();
         }
 
@@ -35,10 +37,7 @@ namespace Module7_TAM_V2.States
                     break;
                 case 1:
                     folderD.State = new UnhighlightedState(this);
-                    break;
-                case 2:
-                    folderD.State = this;
-                    break;
+                    break;                
             }
         }
     }

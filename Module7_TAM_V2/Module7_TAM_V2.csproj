@@ -94,8 +94,6 @@
     </Compile>
     <Compile Include="Model\Message.cs" />
     <Compile Include="Elements\BaseElement.cs" />
-    <Compile Include="States\Enum.cs" />
-    <Compile Include="States\Folder.cs" />
     <Compile Include="States\FolderD.cs" />
     <Compile Include="States\HighlightedState.cs" />
     <Compile Include="States\State.cs" />

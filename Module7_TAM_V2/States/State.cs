@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
 
 namespace Module7_TAM_V2.States
 {
@@ -17,7 +13,7 @@ namespace Module7_TAM_V2.States
             set { folderD = value; }
         }
 
-        public abstract void Highlight();
-        public abstract void UnHighlight();
+        public abstract void Highlight(IWebElement element);
+        public abstract void UnHighlight(IWebElement element);
     }
 }

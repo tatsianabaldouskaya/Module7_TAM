@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
 
 namespace Module7_TAM_V2.States
 {
@@ -12,7 +8,7 @@ namespace Module7_TAM_V2.States
 
         public FolderD()
         {
-            this.state = new UnhighlightedState(state);
+            this.state = new UnhighlightedState(this);
         }
 
         public State State
@@ -21,14 +17,19 @@ namespace Module7_TAM_V2.States
             set { state = value; }
         }
 
-        public void HighLight()
+        public void HighLight(IWebElement element)
         {
-            state.Highlight();
+            state.Highlight(element);
         }
 
-        public void UnHighlight()
+        public void UnHighlight(IWebElement element)
         {
-            state.UnHighlight();
+            state.UnHighlight(element);
+        }
+
+        public bool CheckCurrentState(IWebElement element)
+        {
+            return element.GetCssValue("background-color") == "rgba(255, 255, 0, 1)";
         }
     }
 }
