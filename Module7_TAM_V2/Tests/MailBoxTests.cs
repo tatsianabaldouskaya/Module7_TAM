@@ -77,25 +77,25 @@ namespace Module7_TAM_V2
             var signedOutText = mailBoxPage.ClickUserIcon()
                  .ClickSignOut();
             Assert.IsTrue(signedOutText.IsSignedOutTextDisplayed(), "You are not logged off");
-        }
+        }      
 
         [Test]
-        public void HighlightTest()
+        public void HighlightTestD()
         {
             var user = new User(email, password);
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
             loginPage.Login(user);
-            var folder = new Folder();
-            folder.HighlightFolder(menuPanel.GetDraftsFolder());
-            Assert.AreEqual(FolderState.Highlighted, folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is not highlighted");
-            folder.UnhighlightFolder(menuPanel.GetDraftsFolder());
-            folder.HighlightFolder(menuPanel.GetSentFolder());
+            var folder = new FolderD();
+            folder.HighLight(menuPanel.GetDraftsFolder());
+            Assert.IsTrue(folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is not highlighted");
+            folder.UnHighlight(menuPanel.GetDraftsFolder());
+            folder.HighLight(menuPanel.GetSentFolder());
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(FolderState.Unhighlighted, folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is highlighted");
-                Assert.AreEqual(FolderState.Highlighted, folder.CheckCurrentState(menuPanel.GetSentFolder()), "Sent folder is not highlighted");
+                Assert.IsFalse(folder.CheckCurrentState(menuPanel.GetDraftsFolder()), "Draft folder is highlighted");
+                Assert.IsTrue(folder.CheckCurrentState(menuPanel.GetSentFolder()), "Sent folder is not highlighted");
             });
         }
 
