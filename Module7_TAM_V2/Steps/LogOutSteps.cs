@@ -17,8 +17,8 @@ namespace Module7_TAM_V2.Steps
         private static string baseUrl = ConfigurationManager.AppSettings.Get("baseUrl");
         private readonly ScenarioContext _scenarioContext;
         private LoginPage loginPage;
-        private MailBoxPage mailBoxPage;
-        private LogOutPage logOutPage;
+        private MailBoxPage mailBoxPage = new MailBoxPage();
+        private LogOutPage logOutPage = new LogOutPage();
 
         [BeforeTestRun]
         public static void BeforeTestRun()

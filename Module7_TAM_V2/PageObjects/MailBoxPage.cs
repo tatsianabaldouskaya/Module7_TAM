@@ -55,7 +55,7 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
         public IWebElement starIconActive;
 
-        public static void ClickUserIcon()
+        public void ClickUserIcon()
         {
             WaitForIsVisible(userIcon).Click();
         }
