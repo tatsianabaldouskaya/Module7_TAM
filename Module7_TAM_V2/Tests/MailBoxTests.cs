@@ -7,6 +7,7 @@ using System.Threading;
 using Module7_TAM_V2.States;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium;
+using Module7_TAM_V2.PageObjects;
 
 namespace Module7_TAM_V2
 {
@@ -19,6 +20,7 @@ namespace Module7_TAM_V2
         private string addresseeValue = MessageData.addresseeValue;
         private string subjectValue = MessageData.subjectValue;
         private string bodyValue = MessageData.bodyValue;
+        private EntryPage entryPage;
         private LoginPage loginPage;
         private MailBoxPage mailBoxPage;
         private MenuPanel menuPanel;
@@ -26,9 +28,11 @@ namespace Module7_TAM_V2
         public void LoginTest()
         {
             var user = new User(email, password);
+            entryPage = new EntryPage();
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
+            entryPage.OpenLoginForm();
             loginPage.Login(user);
             var userIcon = mailBoxPage.ClickUserIcon();           
             Assert.AreEqual(email, userIcon.GetActualEmail(),
@@ -71,9 +75,11 @@ namespace Module7_TAM_V2
         public void LogoutTest()
         {
             var user = new User(email, password);
+            entryPage = new EntryPage();
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
-            loginPage.Login(user);
+            entryPage.OpenLoginForm()
+                .Login(user);
             var signedOutText = mailBoxPage.ClickUserIcon()
                  .ClickSignOut();
             Assert.IsTrue(signedOutText.IsSignedOutTextDisplayed(), "You are not logged off");

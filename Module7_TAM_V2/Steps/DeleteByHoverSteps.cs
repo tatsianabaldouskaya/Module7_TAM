@@ -1,4 +1,5 @@
 ﻿using Module7_TAM_V2.Model;
+using Module7_TAM_V2.PageObjects;
 using Module7_TAM_V2.Utils;
 using Module7_TAM_V2.WebDriver;
 using NUnit.Framework;
@@ -21,6 +22,7 @@ namespace Module7_TAM_V2.Steps
         private string addresseeValue = MessageData.addresseeValue;
         private string subjectValue = MessageData.subjectValue;
         private string bodyValue = MessageData.bodyValue;
+        private EntryPage entryPage;
         private LoginPage loginPage;
         private MailBoxPage mailBoxPage;
         private MenuPanel menuPanel;
@@ -34,7 +36,6 @@ namespace Module7_TAM_V2.Steps
        
         // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
 
-
         public DeleteByHoverSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
@@ -42,7 +43,6 @@ namespace Module7_TAM_V2.Steps
 
         [Given(@"I am logged in my account")]
         public void LogInMyAccount()
-
         {
             var user = new User(email, password);
             loginPage = new LoginPage();

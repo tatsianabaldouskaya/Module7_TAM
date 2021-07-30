@@ -28,38 +28,6 @@ namespace Module7_TAM_V2
             WaitForIsVisible(draftsFolder).Click();          
             return new MailBoxPage();
         }
-        //public MenuPanel HighlightDraftsFolder()
-        //{
-        //    IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
-        //    var folder = new Folder();
-        //    WaitForIsVisible(draftsFolder).Click();
-        //    if (folder.CheckCurrentState(draftsFolder) == FolderState.Unhighlighted)
-        //    {
-        //        js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", draftsFolder);
-        //        folder.CheckCurrentState(draftsFolder);
-        //    }
-        //    else
-        //    {
-        //        System.Console.WriteLine("Folder is already highlighted");
-        //    }
-        //    return this;
-        //}
-        //public MenuPanel HighlightSentFolder()
-        //{
-        //    IJavaScriptExecutor js = Browser.GetDriver() as IJavaScriptExecutor;
-        //    var folder = new Folder();
-        //    WaitForIsVisible(sentFolder).Click();
-        //    if (folder.CheckCurrentState(sentFolder) == FolderState.Unhighlighted)
-        //    {
-        //        js.ExecuteScript("arguments[0].style.backgroundColor = '" + "white" + "'", draftsFolder);
-        //        js.ExecuteScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", sentFolder);
-        //    }
-        //    else
-        //    {
-        //        System.Console.WriteLine("Folder is already highlighted");
-        //    }
-        //    return this;
-        //}
 
         public IWebElement GetDraftsFolder()
         {

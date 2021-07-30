@@ -120,11 +120,13 @@
     </Compile>
     <Compile Include="Model\Message.cs" />
     <Compile Include="Elements\BaseElement.cs" />
+    <Compile Include="PageObjects\EntryPage.cs" />
     <Compile Include="States\FolderD.cs" />
     <Compile Include="States\HighlightedState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="States\UnhighlightedState.cs" />
     <Compile Include="Steps\DeleteByHoverSteps.cs" />
+    <Compile Include="Steps\LogOutSteps.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="UserData.Designer.cs">
@@ -149,6 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\SpecFlowInboxTests.feature" />
+    <None Include="Features\SpecFlowLogOutTest.feature" />
     <None Include="packages.config" />
     <None Include="Resources\MessageData.xlsx" />
     <None Include="Resources\UserData.xlsx" />

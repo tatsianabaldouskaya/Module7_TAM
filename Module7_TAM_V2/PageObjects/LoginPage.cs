@@ -24,7 +24,7 @@ namespace Module7_TAM_V2
         private IWebElement nextButton;
 
         public MailBoxPage Login(User user)
-        {
+        {       
             WaitForIsVisible(emailField).SendKeys(user.email);
             JavaScriptClick(nextButton);
             WaitForIsVisible(passwordField).SendKeys(user.password);
