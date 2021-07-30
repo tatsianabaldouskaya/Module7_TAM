@@ -23,13 +23,12 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//div[@class='FliLIb DL0QTb']//button")]
         private IWebElement nextButton;
 
-        public MailBoxPage Login(User user)
+        public void Login(User user)
         {       
             WaitForIsVisible(emailField).SendKeys(user.email);
             JavaScriptClick(nextButton);
             WaitForIsVisible(passwordField).SendKeys(user.password);
             JavaScriptClick(nextButton);
-            return new MailBoxPage();
         }
 
         public LoginPage EnterEmail(User user)

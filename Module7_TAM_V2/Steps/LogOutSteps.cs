@@ -44,7 +44,7 @@ namespace Module7_TAM_V2.Steps
         [When(@"I click user icon")]
         public void ClickUserIcon()
         {
-            mailBoxPage.ClickUserIcon();
+            MailBoxPage.ClickUserIcon();
         }
 
         [When(@"I click Sign out button")]

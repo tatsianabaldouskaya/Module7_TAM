@@ -10,7 +10,7 @@ namespace Module7_TAM_V2
     public class MailBoxPage : AbstractPage
     {
         [FindsBy(How = How.XPath, Using = "//img[@class='gb_Ca gbii']")]
-        private IWebElement userIcon;
+        private static IWebElement userIcon;
 
         [FindsBy(How = How.Name, Using = "to")]
         private IWebElement addresseeField;
@@ -55,10 +55,9 @@ namespace Module7_TAM_V2
         [FindsBy(How = How.XPath, Using = "//span[@aria-label = 'Starred']")]
         public IWebElement starIconActive;
 
-        public MailBoxPage ClickUserIcon()
+        public static void ClickUserIcon()
         {
             WaitForIsVisible(userIcon).Click();
-            return this;
         }
 
         public string GetActualEmail()

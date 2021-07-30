@@ -1,4 +1,4 @@
-﻿Feature: SpecFlowLogInTest
+﻿Feature: SpecFlowLogOutTest
 	As a user I Want to log out from my email
 
 @critical_path

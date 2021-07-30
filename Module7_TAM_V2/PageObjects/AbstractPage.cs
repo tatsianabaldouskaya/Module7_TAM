@@ -15,7 +15,7 @@ namespace Module7_TAM_V2
         {
             PageFactory.InitElements(Browser.GetDriver(), this);
         }
-        public IWebElement WaitForIsVisible(IWebElement element)
+        public static IWebElement WaitForIsVisible(IWebElement element)
         {
             return new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
         }

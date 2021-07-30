@@ -50,7 +50,7 @@ namespace Module7_TAM_V2.Steps
             loginPage.Login(user);
         }
 
-        [Given(@"create new letter")]
+        [Given(@"I create new letter")]
         public void CreateNewLetter()
         {
             var bodyValue = Randomizer.RandomString(10, true);
@@ -60,7 +60,7 @@ namespace Module7_TAM_V2.Steps
                .SaveDraft();
         }
 
-        [Given(@"open drafts folder")]
+        [Given(@"I open drafts folder")]
         public void OpenDraftsFolder()
         {
             menuPanel.OpenDraftsFolder();
@@ -72,7 +72,7 @@ namespace Module7_TAM_V2.Steps
             var letter = mailBoxPage.HoverLetter();
         }
 
-        [When(@"click basket icon")]
+        [When(@"I click basket icon")]
         public void ClickBasketIcon()
         {
             mailBoxPage.JsClickDeleteLetter();
