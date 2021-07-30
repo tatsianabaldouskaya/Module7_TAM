@@ -1,12 +1,14 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Threading;
 
 namespace Module7_TAM_V2.WebDriver
 {
     public class Browser
     {
         private static Browser currentInstance;
-        private static IWebDriver driver;
+        // private static IWebDriver driver;
+        private static ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
         public static BrowserFactory.BrowserType CurrentBrowser;
         private static string browser;
 
@@ -14,17 +16,17 @@ namespace Module7_TAM_V2.WebDriver
         {
             browser = Configuration.Browser;
             Enum.TryParse(browser, out CurrentBrowser);
-            driver = BrowserFactory.GetDriver(CurrentBrowser, 10);
+            driver.Value = BrowserFactory.GetDriver(CurrentBrowser, 10);
         }
         public static IWebDriver GetDriver()
         {
-            return driver;
+            return driver.Value;
         }
         public static Browser Instance => currentInstance ?? (currentInstance = new Browser());
         public static void CloseDriver()
         {
             GetDriver().Quit();
-            driver = null;
+            driver.Value = null;
             currentInstance = null;
             browser = null;
         }
