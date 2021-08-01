@@ -137,6 +137,7 @@
     <Compile Include="States\UnhighlightedState.cs" />
     <Compile Include="Steps\CreateMessageSteps.cs" />
     <Compile Include="Steps\DeleteByHoverSteps.cs" />
+    <Compile Include="Steps\DeleteByRightClickSteps.cs" />
     <Compile Include="Steps\LogInSteps.cs" />
     <Compile Include="Steps\LogOutSteps.cs" />
     <Compile Include="Model\User.cs" />
@@ -163,6 +164,7 @@
     <None Include="Default.srprofile" />
     <None Include="Features\SpecFlowCreateMessageTest.feature" />
     <None Include="Features\SpecFlowDeleteByHoverTests.feature" />
+    <None Include="Features\SpecFlowDeleteByRightClickTest.feature" />
     <None Include="Features\SpecFlowLogOutTest.feature" />
     <None Include="packages.config" />
     <None Include="Resources\MessageData.xlsx" />

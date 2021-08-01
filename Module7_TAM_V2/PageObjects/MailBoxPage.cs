@@ -137,16 +137,20 @@ namespace Module7_TAM_V2
             builder.DragAndDrop(letter, starredFolder).Perform();
             return this;
         }
-        public MailBoxPage RightClickLetterAndDelete()
+        public void RightClickLetter()
         {
             WaitForIsVisible(letter);
             Actions builder = new Actions(Browser.GetDriver());
-            builder.ContextClick(letter).Release()
-                .SendKeys(Keys.ArrowDown)
+            builder.ContextClick(letter).Release();
+        }
+
+        public void SelectDeleteThroughRightClick()
+        {
+            Actions builder = new Actions(Browser.GetDriver());
+            builder.SendKeys(Keys.ArrowDown)
                 .SendKeys(Keys.ArrowDown)
                 .SendKeys(Keys.Enter)
                 .Perform();
-            return this;
         }
         public bool IsLetterDisplayed()
         {
