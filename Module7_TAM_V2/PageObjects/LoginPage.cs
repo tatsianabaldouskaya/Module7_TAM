@@ -29,18 +29,6 @@ namespace Module7_TAM_V2
             JavaScriptClick(nextButton);
             WaitForIsVisible(passwordField).SendKeys(user.password);
             JavaScriptClick(nextButton);
-        }
-
-        public LoginPage EnterEmail(User user)
-        {
-            WaitForIsVisible(emailField).SendKeys(user.email);
-            return this;
-        }
-
-        public LoginPage EnterPassword(User user)
-        {
-            WaitForIsVisible(emailField).SendKeys(user.password);
-            return this;
-        }
+        }      
     }
 }

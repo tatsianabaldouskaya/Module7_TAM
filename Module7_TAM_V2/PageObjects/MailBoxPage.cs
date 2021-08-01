@@ -10,7 +10,7 @@ namespace Module7_TAM_V2
     public class MailBoxPage : AbstractPage
     {
         [FindsBy(How = How.XPath, Using = "//img[@class='gb_Ca gbii']")]
-        private static IWebElement userIcon;
+        private IWebElement userIcon;
 
         [FindsBy(How = How.Name, Using = "to")]
         private IWebElement addresseeField;
@@ -74,10 +74,25 @@ namespace Module7_TAM_V2
             bodyField.SendKeys(message.bodyValue);
             return this;
         }
-        public MenuPanel SaveDraft()
+
+        public void FillAddressee(string addressee)
+        {
+            WaitForIsVisible(addresseeField).SendKeys(addressee);
+        }
+
+        public void FillSubject(string subject)
+        {
+            WaitForIsVisible(subjectField).SendKeys(subject);
+        }
+
+        public void FillBody(string body)
+        {
+            WaitForIsVisible(bodyField).SendKeys(body);
+        }
+
+        public void SaveDraft()
         {
             closeMessageButton.Click();
-            return new MenuPanel();
         }
         public string GetSavedMessageAddressee()
         {

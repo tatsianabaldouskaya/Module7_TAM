@@ -2,9 +2,10 @@
 	As a user
 	I want to be able to delete letter by hover
 
+Background:
+	Given I am logged in my account	
 @regression
 Scenario: Hovering letter and clicking basket icon should delete the letter
-	Given I am logged in my account
 	And I create new letter
 	And I open drafts folder
 	When I hover the letter

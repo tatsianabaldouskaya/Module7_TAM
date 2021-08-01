@@ -19,8 +19,7 @@ namespace Module7_TAM_V2.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SpecFlowLogOutTest")]
+    [TechTalk.SpecRun.FeatureAttribute("SpecFlowLogOutTest", Description="\tAs a user I Want to log out from my email", SourceFile="Features\\SpecFlowLogOutTest.feature", SourceLine=0)]
     public partial class SpecFlowLogOutTestFeature
     {
         
@@ -31,7 +30,7 @@ namespace Module7_TAM_V2.Features
 #line 1 "SpecFlowLogOutTest.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
+        [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -39,19 +38,18 @@ namespace Module7_TAM_V2.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
+        [TechTalk.SpecRun.FeatureCleanup()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -60,7 +58,6 @@ namespace Module7_TAM_V2.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -73,16 +70,24 @@ namespace Module7_TAM_V2.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Log out from email")]
-        [NUnit.Framework.CategoryAttribute("critical_path")]
+        public virtual void FeatureBackground()
+        {
+#line 4
+#line hidden
+#line 5
+  testRunner.Given("I am logged in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Log out from email", new string[] {
+                "smoke"}, SourceLine=6)]
         public virtual void LogOutFromEmail()
         {
             string[] tagsOfScenario = new string[] {
-                    "critical_path"};
+                    "smoke"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Log out from email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -102,16 +107,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
- testRunner.Given("I am logged in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 7
- testRunner.When("I click user icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 4
+this.FeatureBackground();
 #line hidden
 #line 8
- testRunner.And("I click Sign out button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click user icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
+ testRunner.And("I click Sign out button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 10
  testRunner.Then("Signed out text is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

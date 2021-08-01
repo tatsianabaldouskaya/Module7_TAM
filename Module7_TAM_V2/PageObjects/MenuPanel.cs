@@ -23,10 +23,9 @@ namespace Module7_TAM_V2
         private IWebElement draftsFolder;
         
         
-        public MailBoxPage OpenDraftsFolder()
+        public void OpenDraftsFolder()
         {
             WaitForIsVisible(draftsFolder).Click();          
-            return new MailBoxPage();
         }
 
         public IWebElement GetDraftsFolder()

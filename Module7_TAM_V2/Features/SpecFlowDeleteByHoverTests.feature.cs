@@ -19,8 +19,7 @@ namespace Module7_TAM_V2.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SpecFlowDeleteByHoverTests")]
+    [TechTalk.SpecRun.FeatureAttribute("SpecFlowDeleteByHoverTests", Description="\tAs a user\r\n\tI want to be able to delete letter by hover", SourceFile="Features\\SpecFlowDeleteByHoverTests.feature", SourceLine=0)]
     public partial class SpecFlowDeleteByHoverTestsFeature
     {
         
@@ -31,7 +30,7 @@ namespace Module7_TAM_V2.Features
 #line 1 "SpecFlowDeleteByHoverTests.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
+        [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -39,19 +38,18 @@ namespace Module7_TAM_V2.Features
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
+        [TechTalk.SpecRun.FeatureCleanup()]
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
         public virtual void TestInitialize()
         {
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -60,7 +58,6 @@ namespace Module7_TAM_V2.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
         public virtual void ScenarioStart()
@@ -73,16 +70,24 @@ namespace Module7_TAM_V2.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Hovering letter and clicking basket icon should delete the letter")]
-        [NUnit.Framework.CategoryAttribute("regression")]
+        public virtual void FeatureBackground()
+        {
+#line 5
+#line hidden
+#line 6
+ testRunner.Given("I am logged in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Hovering letter and clicking basket icon should delete the letter", new string[] {
+                "regression"}, SourceLine=7)]
         public virtual void HoveringLetterAndClickingBasketIconShouldDeleteTheLetter()
         {
             string[] tagsOfScenario = new string[] {
                     "regression"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Hovering letter and clicking basket icon should delete the letter", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 6
+#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -102,22 +107,22 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("I am logged in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 8
- testRunner.And("I create new letter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 5
+this.FeatureBackground();
 #line hidden
 #line 9
- testRunner.And("I open drafts folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I create new letter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
- testRunner.When("I hover the letter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I open drafts folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
- testRunner.And("I click basket icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I hover the letter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
+ testRunner.And("I click basket icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 13
  testRunner.Then("letter is deleted from the folder", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

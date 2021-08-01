@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Module7_TAM_V2.Steps
@@ -9,57 +6,56 @@ namespace Module7_TAM_V2.Steps
     [Binding]
     public sealed class CreateMessageSteps
     {
-        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        private MailBoxPage mailBoxPage = new MailBoxPage();
+        private MenuPanel menuPanel = new MenuPanel();
 
-        private readonly ScenarioContext _scenarioContext;
-
-        public CreateMessageSteps(ScenarioContext scenarioContext)
+        [Given(@"I click composeButton")]
+        public void ClickComposeButton()
         {
-            _scenarioContext = scenarioContext;
-        }
-
-        [When(@"I click composeButton")]
-        public void WhenIClickComposeButton()
-        {
-            ScenarioContext.Current.Pending();
+            menuPanel.OpenNewMessageForm();
         }
 
         [When(@"I enter '(.*)' to addresseeField")]
-        public void WhenIEnterToAddresseeField(string p0)
+        public void EnterAddressee(string addressee)
         {
-            ScenarioContext.Current.Pending();
+            mailBoxPage.FillAddressee(addressee);
         }
 
         [When(@"I enter '(.*)' to subjectField")]
-        public void WhenIEnterToSubjectField(string p0)
+        public void EnterToSubject(string subject)
         {
-            ScenarioContext.Current.Pending();
+            mailBoxPage.FillSubject(subject);
         }
 
         [When(@"I enter '(.*)' to bodyField")]
-        public void WhenIEnterToBodyField(string p0)
+        public void EnterBody(string body)
         {
-            ScenarioContext.Current.Pending();
+            mailBoxPage.FillBody(body);
         }
 
         [When(@"I click closeIcon")]
-        public void WhenIClickCloseIcon()
+        public void ClickCloseIcon()
         {
-            ScenarioContext.Current.Pending();
+            mailBoxPage.SaveDraft();
         }
 
         [When(@"I open drafts folder")]
-        public void WhenIOpenDraftsFolder()
+        public void OpenDraftsFolder()
         {
-            ScenarioContext.Current.Pending();
+            menuPanel.OpenDraftsFolder();
         }
 
         [Then(@"letter is displayed in drafts folder")]
-        public void ThenLetterIsDisplayedInDraftsFolder()
+        public void LetterIsDisplayedInDraftsFolder()
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsTrue(mailBoxPage.IsLetterDisplayed());
         }
 
-
+        [AfterScenario("Create message")]
+        public void CleanFolder()
+        {
+            mailBoxPage.HoverLetter();
+            mailBoxPage.JsClickDeleteLetter();
+        }
     }
 }

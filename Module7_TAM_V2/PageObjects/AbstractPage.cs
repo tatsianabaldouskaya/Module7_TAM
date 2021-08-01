@@ -24,20 +24,16 @@ namespace Module7_TAM_V2
         {
             try
             {
-                Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(0));
-                var isEnabled =  new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(x => element.Enabled);
-                Browser.GetDriver().Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(10));
-                return isEnabled;
+                new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(x => element.Displayed);
+                return true;
             }
-            catch (NoSuchElementException ex)
+            catch (NoSuchElementException)
             {
-                ExceptionHandler.Instance.WriteExceptionLog(ex);
                 return false;
             }
 
-            catch (StaleElementReferenceException ex)
+            catch (StaleElementReferenceException)
             {
-                ExceptionHandler.Instance.WriteExceptionLog(ex);
                 return false;
             }
         }
