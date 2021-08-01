@@ -14,7 +14,7 @@ Scenario Outline: Create message
 	Then letter is displayed in drafts folder
 
 	Examples:
-	| addresseeValue           | subjectValue | bodyValue          |
-	| tatiana95.77@gmail.com   | For test     |Test email          |
-	| tatiana95.77+1@gmail.com | For test     | Hello world!       |
-	| tatiana95.77+2@gmail.com | For test     |It's my test project|
+	| addresseeValue           | subjectValue | bodyValue |
+	| tatiana95.77@gmail.com   | For test     |email_11c  |
+	| tatiana95.77+1@gmail.com | For test     |email_25b  |
+	| tatiana95.77+2@gmail.com | For test     |email_77a  |

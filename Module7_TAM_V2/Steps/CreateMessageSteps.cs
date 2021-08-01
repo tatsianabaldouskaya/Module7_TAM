@@ -27,7 +27,7 @@ namespace Module7_TAM_V2.Steps
             mailBoxPage.FillSubject(subject);
         }
 
-        [When(@"I enter '(.*)' to bodyField")]
+        [When(@"I enter '([a-z]{5}[_][1-9]{2}[abc])' to bodyField")]
         public void EnterBody(string body)
         {
             mailBoxPage.FillBody(body);

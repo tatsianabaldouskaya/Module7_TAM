@@ -146,7 +146,7 @@ this.FeatureBackground();
         public virtual void CreateMessage_Tatiana95_77Gmail_Com()
         {
 #line 7
-this.CreateMessage("tatiana95.77@gmail.com", "For test", "Test email", ((string[])(null)));
+this.CreateMessage("tatiana95.77@gmail.com", "For test", "email_11ca", ((string[])(null)));
 #line hidden
         }
         
@@ -155,7 +155,7 @@ this.CreateMessage("tatiana95.77@gmail.com", "For test", "Test email", ((string[
         public virtual void CreateMessage_Tatiana95_771Gmail_Com()
         {
 #line 7
-this.CreateMessage("tatiana95.77+1@gmail.com", "For test", "Hello world!", ((string[])(null)));
+this.CreateMessage("tatiana95.77+1@gmail.com", "For test", "email_25b", ((string[])(null)));
 #line hidden
         }
         
@@ -164,7 +164,7 @@ this.CreateMessage("tatiana95.77+1@gmail.com", "For test", "Hello world!", ((str
         public virtual void CreateMessage_Tatiana95_772Gmail_Com()
         {
 #line 7
-this.CreateMessage("tatiana95.77+2@gmail.com", "For test", "It\'s my test project", ((string[])(null)));
+this.CreateMessage("tatiana95.77+2@gmail.com", "For test", "email_77a", ((string[])(null)));
 #line hidden
         }
     }
