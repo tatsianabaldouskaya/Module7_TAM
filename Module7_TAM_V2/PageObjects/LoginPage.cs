@@ -9,6 +9,7 @@ using System.Configuration;
 using SeleniumExtras.PageObjects;
 using Module7_TAM_V2.Model;
 using Module7_TAM_V2.Elements;
+using Module7_TAM_V2.Utils;
 
 namespace Module7_TAM_V2
 {
@@ -28,7 +29,7 @@ namespace Module7_TAM_V2
             WaitForIsVisible(emailField).SendKeys(user.email);
             JavaScriptClick(nextButton);
             WaitForIsVisible(passwordField).SendKeys(user.password);
-            JavaScriptClick(nextButton);
+            JavaScriptClick(nextButton);           
             return new MailBoxPage();
         }
 

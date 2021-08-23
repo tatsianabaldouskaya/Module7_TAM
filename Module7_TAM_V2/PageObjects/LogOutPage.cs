@@ -6,6 +6,7 @@ using OpenQA.Selenium.Chrome;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using Module7_TAM_V2.Utils;
 
 namespace Module7_TAM_V2
 {

@@ -12,8 +12,11 @@ namespace Module7_TAM_V2.Utils
     {
         public static void GetScreenshot()
         {
-            Screenshot image = ((ITakesScreenshot)Browser.GetDriver()).GetScreenshot();
-            image.SaveAsFile("C:/Users/Tatsiana_Baldouskaya/source/repos/Module7_TAM/image.png", ScreenshotImageFormat.Png);
+            Screenshot screenShot = ((ITakesScreenshot)Browser.GetDriver()).GetScreenshot();
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd-hhmm-ss");
+            var path = "C:/Users/Tatsiana_Baldouskaya/source/repos/Module7_TAM/";
+            screenShot.SaveAsFile(path+"screenshot_"+ timestamp +".png", ScreenshotImageFormat.Png);
+            Logger.Log.Info("ScreenShot is saved to "+ path);
         }                 
     }
 }

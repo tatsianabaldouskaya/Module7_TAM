@@ -73,6 +73,7 @@ namespace Module7_TAM_V2
             WaitForIsVisible(addresseeField).SendKeys(message.addresseeValue);
             subjectField.SendKeys(message.subjectValue);
             bodyField.SendKeys(message.bodyValue);
+            Logger.Log.Debug("Message draft is created");
             return this;
         }
         public MenuPanel SaveDraft()

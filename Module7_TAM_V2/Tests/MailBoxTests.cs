@@ -7,6 +7,9 @@ using System.Threading;
 using Module7_TAM_V2.States;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium;
+using System.Drawing.Imaging;
+using NUnit.Framework.Interfaces;
+using TestProject.OpenSDK;
 
 namespace Module7_TAM_V2
 {
@@ -14,6 +17,7 @@ namespace Module7_TAM_V2
     [Parallelizable]
     class MailBoxTests : BaseTest
     {
+       // private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private string email = UserData.email;
         private string password = UserData.password;
         private string addresseeValue = MessageData.addresseeValue;
@@ -25,19 +29,21 @@ namespace Module7_TAM_V2
         [Test]
         public void LoginTest()
         {
+            Logger.Log.Info("Login test is launched");
             var user = new User(email, password);
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
             menuPanel = new MenuPanel();
             loginPage.Login(user);
-            var userIcon = mailBoxPage.ClickUserIcon();           
-            Assert.AreEqual(email, userIcon.GetActualEmail(),
-                "Login is unsuccessful");
+            Logger.Log.Debug("User is logged in with email " + user.email);
+            var userIcon = mailBoxPage.ClickUserIcon();
+            Assert.AreEqual(email, userIcon.GetActualEmail(), "Login is unsuccessful");
         }
 
         [Test]
         public void CreateDraftEmailAndSendTest()
         {
+            Logger.Log.Info("CreateDraftEmailAndSendTest is launched");
             var bodyValue = Randomizer.RandomString(10, true);
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
@@ -60,7 +66,6 @@ namespace Module7_TAM_V2
                 Assert.AreEqual(message.bodyValue, savedMessage.GetSavedMessageBody(),
                     "Body doesn't correspond to expected");
             });
-            Screenshoter.GetScreenshot();
             var sentMessage = savedMessage.SendMessage();
             sentMessage = menuPanel.OpenSentFolder();
             Assert.IsTrue(sentMessage.IsLetterDisplayed(),
@@ -70,6 +75,7 @@ namespace Module7_TAM_V2
         [Test]
         public void LogoutTest()
         {
+            Logger.Log.Info("LogoutTest is launched");
             var user = new User(email, password);
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
@@ -82,6 +88,7 @@ namespace Module7_TAM_V2
         [Test]
         public void HighlightTestD()
         {
+            Logger.Log.Info("HighlightTestD is launched");
             var user = new User(email, password);
             loginPage = new LoginPage();
             mailBoxPage = new MailBoxPage();
@@ -102,6 +109,7 @@ namespace Module7_TAM_V2
         [Test]
         public void DeleteLetterByHoverTest()
         {
+            Logger.Log.Info("DeleteLetterByHoverTest is launched");
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
             loginPage = new LoginPage();
@@ -121,6 +129,7 @@ namespace Module7_TAM_V2
         [Test]
         public void DragAndDropToStarredTest()
         {
+            Logger.Log.Info("DragAndDropToStarredTest is launched");
             var user = new User(email, password);
             var message = new Message(addresseeValue, subjectValue, bodyValue);
             loginPage = new LoginPage();
@@ -138,6 +147,7 @@ namespace Module7_TAM_V2
         [Test]
         public void DeleteLetterByRightMouseClickTest()
         {
+            Logger.Log.Info("DeleteLetterByRightMouseClickTest is launched");
             var message = new Message(addresseeValue, subjectValue, bodyValue);
             var user = new User(email, password);
             loginPage = new LoginPage();

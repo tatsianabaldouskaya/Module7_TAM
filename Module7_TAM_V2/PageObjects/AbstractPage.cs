@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using Module7_TAM_V2.WebDriver;
+using Module7_TAM_V2.Utils;
 using ExceptionHandler = Module7_TAM_V2.Utils.ExceptionHandler;
 
 namespace Module7_TAM_V2
@@ -17,7 +18,24 @@ namespace Module7_TAM_V2
         }
         public IWebElement WaitForIsVisible(IWebElement element)
         {
-            return new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+            try
+            {
+                return new WebDriverWait(Browser.GetDriver(), TimeSpan.FromSeconds(20)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+            }
+            catch (NoSuchElementException ex)
+            {
+                // ExceptionHandler.Instance.WriteExceptionLog(ex);
+                Logger.Log.Error("NoSuchElement exception is thrown");
+                throw;
+            }
+
+            catch (StaleElementReferenceException ex)
+            {
+                // ExceptionHandler.Instance.WriteExceptionLog(ex);
+                Logger.Log.Error("StaleElementException is thrown");
+                throw;
+            }
+
         }
 
         public bool IsElementDisplayed(IWebElement element)
@@ -31,14 +49,17 @@ namespace Module7_TAM_V2
             }
             catch (NoSuchElementException ex)
             {
-                ExceptionHandler.Instance.WriteExceptionLog(ex);
+               // ExceptionHandler.Instance.WriteExceptionLog(ex);
+                Logger.Log.Error("NoSuchElement exception is thrown");
                 return false;
             }
 
             catch (StaleElementReferenceException ex)
             {
-                ExceptionHandler.Instance.WriteExceptionLog(ex);
+               // ExceptionHandler.Instance.WriteExceptionLog(ex);
+                Logger.Log.Error("StaleElementException is thrown");
                 return false;
+
             }
         }
         public void JavaScriptClick(IWebElement element)
