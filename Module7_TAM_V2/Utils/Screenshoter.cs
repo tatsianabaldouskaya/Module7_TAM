@@ -14,7 +14,7 @@ namespace Module7_TAM_V2.Utils
         {
             Screenshot screenShot = ((ITakesScreenshot)Browser.GetDriver()).GetScreenshot();
             string timestamp = DateTime.Now.ToString("yyyy-MM-dd-hhmm-ss");
-            var path = "C:/Users/Tatsiana_Baldouskaya/source/repos/Module7_TAM/";
+            var path = "C:/Users/Tatsiana_Baldouskaya/source/repos/Module7_TAM/Module7_TAM_V2/Screenshots/";
             screenShot.SaveAsFile(path+"screenshot_"+ timestamp +".png", ScreenshotImageFormat.Png);
             Logger.Log.Info("ScreenShot is saved to "+ path);
         }                 
